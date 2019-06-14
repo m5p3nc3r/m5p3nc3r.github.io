@@ -12,7 +12,7 @@ description: Personal diary of things I am doing or plan to do.  If you find it 
 avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/jekyll-logo.png
 
 # Set the theme for the site:
-theme: jekyll-theme-hacker
+theme: jekyll-theme-cayman
 
 #
 # Flags below are optional
