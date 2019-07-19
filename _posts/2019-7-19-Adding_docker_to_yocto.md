@@ -43,7 +43,7 @@ Containers rely heavily on the host kernel to operate correctly, this requires y
 
 ````
 # On device, download an execute the check-config script
-wget https:/home/matt/projects/yocto/yocto-odroid/build/tmp/work/odroid_c2-poky-linux/linux-stable/5.0.19+gitAUTOINC+2bc19ce252_machine-r0/fragment.cfg//raw.githubusercontent.com/moby/moby/master/contrib/check-config.sh
+wget https://raw.githubusercontent.com/moby/moby/master/contrib/check-config.sh
 # Note the script requires bash, which is why we added it to our
 # build earlier :¬)
 bash check-config.sh
