@@ -1,0 +1,26 @@
+ul.navigation {
+  position: sticky;
+  position: -webkit-sticky; /* Safari */
+  top: 0px;
+  background-color: #dddc;
+  list-style-type: none;
+  overflow: hidden;
+  margin: -50px 0 0 0;
+}
+
+ul.navigation li {
+  float: left;
+}
+
+ul.navigation li a {
+  display: block;
+  padding: 8px 12px;
+  text-align: centre;
+  text-decoration: none;
+  border-top: 5px solid #0000;
+  border-bottom: 5px solid #0000;
+}
+
+ul.navigation li a:hover {
+  border-bottom: 5px solid #111;
+}
