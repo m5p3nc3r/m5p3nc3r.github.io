@@ -6,7 +6,8 @@ permalink: /todo/
 
 * [USB Gadget Docker Builder](https://github.com/m5p3nc3r/meta-usbbuilder)
   * [x] [Yocto base image for ODroidC2](/Yocto_for_odroid_c2/)
-  * [ ] Adding docker to base image
+  * [x] [Adding docker to base image](/Adding_docker_to_yocto/)
+  * [ ] Auto configure and startup
   * [ ] Increase entropy for random number generator
   * [ ] Multi-USB gadget for ethernet and uart
   * [ ] Analyse power consumption during build
