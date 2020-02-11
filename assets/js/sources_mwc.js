@@ -6,5 +6,5 @@ import "@material/mwc-menu/mwc-menu.js";
 import "@material/mwc-list/mwc-list.js";
 import "@material/mwc-list/mwc-list-item.js";
 import "@material/mwc-icon/mwc-icon.js";
-//import '@polymer/paper-card/paper-card.js';
+import "@polymer/paper-card/paper-card.js";
 
