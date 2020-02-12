@@ -13,9 +13,9 @@ The answer to that was of course yes!  Thanks so much to ghe guys who have done 
 
 I'll add more when I can, but for now I'm viewing this as my personal diary..
 
-Taken from https://hub.docker.com/r/jacobalberty/unifi/
+Taken from <https://hub.docker.com/r/jacobalberty/unifi/>
 
-```
+```bash
 docker run --rm --name unifi --init \
         -p 8080:8080 \
         -p 8443:8443 \
@@ -26,9 +26,9 @@ docker run --rm --name unifi --init \
         jacobalberty/unifi:stable
 ```
 
-Taken from https://hub.docker.com/r/pducharme/unifi-video-controller
+Taken from <https://hub.docker.com/r/pducharme/unifi-video-controller>
 
-```
+```bash
 docker run \
         --name unifi-video \
         --cap-add SYS_ADMIN \
@@ -52,9 +52,9 @@ docker run \
         pducharme/unifi-video-controller
 ```
 
-The next question was how to get the services up and running on system boot using systemd.  Details were taken from https://container-solutions.com/running-docker-containers-with-systemd/, but my configuration for the controller ended up looking like this
+The next question was how to get the services up and running on system boot using systemd.  Details were taken from <https://container-solutions.com/running-docker-containers-with-systemd/>, but my configuration for the controller ended up looking like this
 
-```
+```bash
 [Unit]
 Description=unifi Controller (docker)
 After=docker.service

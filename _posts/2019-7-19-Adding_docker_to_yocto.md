@@ -5,7 +5,7 @@ title: Adding Docker to our distro
 
 Docker is included in the meta-virtualization package, so we need to add this package to our build, this post will focus on how we get that done and how we modify the kernel configuration to keep docker happy.
 
-````
+```bash
 # From the directory where the other meta-... sources are
 git clone https://git.yoctoproject.org/git/meta-virtualization
 
@@ -20,11 +20,11 @@ bitbake-layers add-layer ../../meta-virtualization
 echo 'DISTRO_FEATURES_append = " virtualization"' >> conf/local.conf
 # Note, we need bash to run a script later in the post, so I add it here.
 echo 'IMAGE_INSTALL_append = " bash docker"' >> conf/local.conf
-````
+```
 
 We are not quite done yet, we need to add the layers that the virtualization layer depends upon.  To do this we need to include the meta-openembedded layer, and add specific functionality to our build.
 
-```
+```bash
 #Add the meta-openembedded resources in our meta-... directory
 git clone git://git.openembedded.org/meta-openembedded
 
@@ -35,13 +35,13 @@ git clone git://git.openembedded.org/meta-openembedded
   /home/matt/projects/yocto/meta-openembedded/meta-filesystems \
   /home/matt/projects/yocto/meta-openembedded/meta-networking \
   /home/matt/projects/yocto/meta-openembedded/meta-python \
-````
+```
 
 ## Updating the kernel configuration ready for docker
 
 Containers rely heavily on the host kernel to operate correctly, this requires you ensure your kernel configuration is set up properly.  Luckily there is a script you can download that is part of the moby project that analyses your current kernel configuration.
 
-````
+```bash
 # On device, download an execute the check-config script
 wget https://raw.githubusercontent.com/moby/moby/master/contrib/check-config.sh
 # Note the script requires bash, which is why we added it to our
@@ -157,8 +157,7 @@ Build the project again, and put the kernel image onto the SD-card and try again
 
 ## Conclusion
 
-![](../images/posts/dockerInfo.png)
-
+![terminal output](../images/posts/dockerInfo.png)
 
 Docker is now installed, but it does not startup automatically.  There are a number of reasons for this
 

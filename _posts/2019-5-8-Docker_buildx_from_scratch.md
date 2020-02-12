@@ -8,8 +8,10 @@ I was recently at DockerCon 2019 in San Francisco on the Arm booth presenting th
 On leaving the conference, I thought it would be fun to build the buildx plugin from sources, I hit a few hurdles on the way, so I will document here what I had to do to get it working.
 
 ## Step 1: install docker-ce from the test channel
+
 NOTE: This is only needed if we are not using docker 19.03.x or above
-```
+
+```bash
 # I am running on Fedora 30 here - your mileage may vary :¬)
 # Remove any old version of docker
 dnf remove docker
@@ -27,7 +29,8 @@ docker version
 ```
 
 ## Step 2 - build the buildx plugin from source
-```
+
+```bash
 # Download the buildx sources
 git clone https://github.com/docker/buildx && cd buildx
 # Follow the instructions for building with Docker 18.09+
@@ -36,14 +39,17 @@ make install
 ```
 
 ## Step 3 - the magic bit to get qemu binfmt_misc working properly
+
 NOTE: This step assume that you already have qemu-user installed
-```
+
+```bash
 # This wires up qemu properly for use
 docker run --privileged linuxkit/binfmt:v0.7
 ```
 
 ## Step 4 - Create a build context
-```
+
+```bash
 # Create a build context
 docker buildx create builder
 docker buildx use builder
@@ -53,9 +59,10 @@ docker buildx inspect --bootstrap
 ```
 
 ## Step 5 - test
+
 Create a simple test application that simply outputs the architecture we are executing on.
 
-```
+```bash
 #include <stdio.h>
 #ifndef ARCH
 #define ARCH "Undefined"
@@ -65,8 +72,10 @@ int main() {
   printf("Hello, my architecture is %s\n", ARCH);
 }
 ```
+
 Then create a simple Dockerfile to build the images. Lets make it fun and use a multi-stage Dockerfile.
-```
+
+```bash
 FROM alpine AS builder
 RUN apk add build-base
 WORKDIR /home
@@ -78,8 +87,10 @@ WORKDIR /home
 COPY --from=builder /home/hello .
 ENTRYPOINT ["./hello"]
 ```
+
 Now lets go ahead and build it for multiple architectures and push to hub.docker.com. This assumes you are already authenticated with hub.
-```
+
+```bash
 docker buildx build --platform linux/amd64,linux/arm64 -t m5p3nc3r/hello . --push
 # We can no check the generated manifest to see that
 # two images are available
@@ -90,4 +101,5 @@ docker run m5p3nc3r/hello:latest@sha256 <the SHA from the manifest>
 ```
 
 ## Conclusion
+
 We have successfully created two binary container images, pushed them to hub, created a manifest that will now allow a 'docker pull' to work from both x86 and arm64 hosts.  Cool!

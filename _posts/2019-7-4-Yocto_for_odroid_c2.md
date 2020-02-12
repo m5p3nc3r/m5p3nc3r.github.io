@@ -13,7 +13,7 @@ Turns out there are some good recipes available for the Amlogic S905 and ODroid 
 
 Rough instructions follow...
 
-````
+```bash
 # Get the poky distro
 git clone -b master git://git.yoctoproject.org/poky.git yocto-odroid
 
@@ -35,17 +35,17 @@ bitbake-layers add-layer ../../meta-odroid
 echo 'MACHINE = "odroid-c2"' >> conf/local.conf
 
 bitbake core-image-minimal
-````
+```
 
 This will take a while to complete, as it is downloading and building all the native packages needed to build the root filesystem for the target system from source.
 
 This just worked for me out-of-the-box.  So, when the build had completed, I could simply burn the image to an sd-card.  You may need to change the target of the following command based on where your sd-card was mounted on the host system.
 
-````
+```bash
 xzcat tmp/deploy/images/odroid-c2/core-image-minimal-odroid-c2.wic.xz | sudo dd of=/dev/mmcblk0 bs=4M iflag=fullblock oflag=direct conv=fsync status=progress
-````
-Pop the sd-card into the ODroid, power it on, and marvel in your awesomeness as the device boots to a login prompt (username - root, no password.... Who needs security anyway!)
+```
 
+Pop the sd-card into the ODroid, power it on, and marvel in your awesomeness as the device boots to a login prompt (username - root, no password.... Who needs security anyway!)
 
 ## Configure the kernel for USB Gadget
 
@@ -53,7 +53,7 @@ The next step is to add the USB gadget support so that we can run ethernet over 
 
 Note - this covers how I created the required kconfig and device tree patches that were needed to get the USB OTG ethernet interface working, you don't need to do these next steps, you can simply [skip to the good part](#this-is-the-good-bit).
 
-````
+```bash
 # Install host dependencies for 'menuconfig'
 sudo dnf install ncurses-devel
 
@@ -76,10 +76,9 @@ bitbake linux-stable -c menuconfig
 bitbake linux-stable -c diffconfig
 
 # Check the console output for where the fragment was dumped
-````
+```
 
-
-## What to do with the config fragment???
+## What to do with the config fragment
 
 This bit gets a little more tricky.  I followed the instructions [here](https://www.yoctoproject.org/docs/1.8/dev-manual/dev-manual.html#understanding-and-creating-layers) and don't want to put a wordy explanation here, so I have put my code up [here](https://github.com/m5p3nc3r/meta-usbbuilder).
 
@@ -93,7 +92,7 @@ Working out what the required changes to get the OTG driver working properly was
 
 You should be able to add the ```meta-usbbuilder``` outlined above to get you to the point of having a functional ethernet connection
 
-````
+```bash
 # Clone the repository into your project
 # In the top level directory of the project (where the other meta-*** projects are)
 git clone https://github.com/m5p3nc3r/meta-usbgadget
@@ -105,12 +104,11 @@ git clone https://github.com/m5p3nc3r/meta-usbgadget
 bitbake core-image-minimal
 
 # Pop onto the SD card and boot the device
-
-````
+```
 
 You should now be able to follow the network configuration in an [earlier post](../Native_buildx_on_arm/#setting-up-the-usb-gadget-ethernet).
 
-![](../images/posts/g_ether.gif)
+![terminal output](../images/posts/g_ether.gif)
 
 ## Conclusion
 
