@@ -14,6 +14,8 @@ avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/je
 # Set the theme for the site:
 theme: jekyll-theme-cayman
 
+webcomponents: mwc
+
 #
 # Flags below are optional
 #

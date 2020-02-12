@@ -5,17 +5,6 @@ title: m5p3nc3r.github.io
 
 <div class="posts">
   {% for post in site.posts %}
-    <paper-card style="margin: 3%;">
-      <div class="card-content">
-        <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
-
-        <div class="entry">
-          {{ post.excerpt }}
-        </div>
-      </div>
-      <div class="card-actions">
-        <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-      </div>
-    </paper-card>
+    {% include layout/{{ site.webcomponents | default: "default" }}/card.html %}
   {% endfor %}
 </div>

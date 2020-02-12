@@ -1,0 +1,10 @@
+{% if site.webcomponents %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.4.1/webcomponents-loader.js" defer></script>
+<script type="module">
+  WebComponents.waitFor(async () => {
+     import("/assets/bundle/sources_{{ site.webcomponents }}.js");
+  });
+</script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
+{% endif %}
